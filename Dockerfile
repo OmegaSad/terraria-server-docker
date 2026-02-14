@@ -1,6 +1,6 @@
 FROM debian:12-slim AS base
 
-ARG VERSION=latest
+ARG VERSION
 
 ENV TERRARIA_VERSION=$VERSION
 ENV TERRARIA_DIR=/root/.local/share/Terraria
