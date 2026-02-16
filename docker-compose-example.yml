@@ -1,7 +1,9 @@
 services: 
   terraria-server:
     build:
-      context: https://github.com/OmegaSad/terraria-server-docker/tree/test-branch.git
+      context: https://github.com/OmegaSad/terraria-server-docker.git#test-branch
+      args:
+        - VERSION=latest
     container_name: terraria-server
     restart: unless-stopped
     stdin_open: true

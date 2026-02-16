@@ -18,7 +18,6 @@ RUN chmod +x \
     init-TerrariaServer-arm64.sh \
     download_server.py \
     prune_unused_files.py \
-    get_latest_by_iteration.py \
     get_latest_version.py
     
 RUN apt-get update -qq && apt-get -qq install python3
@@ -42,14 +41,14 @@ ENV autocreate=1 \
     npcstream=1 \
     priority=1
 
-RUN mkdir -p ${TERRARIA_DIR}/Worlds && mkdir -p ${TERRARIA_DIR}/scripts \
-    mv create-server-config.sh scripts/ \ 
-    mv init-TerrariaServer-amd64.sh scripts/ \
-    mv init-TerrariaServer-arm64.sh scripts/ \
-    mv download_server.py scripts/ \
-    mv prune_unused_files.py scripts/ \
-    mv get_latest_by_iteration.py scripts/ \
-    mv get_latest_version.py scripts/
+RUN mkdir -p ${TERRARIA_DIR}/Worlds && mkdir -p ${TERRARIA_DIR}/scripts
+
+RUN mv create-server-config.sh \ 
+    init-TerrariaServer-amd64.sh \
+    init-TerrariaServer-arm64.sh \
+    download_server.py \
+    prune_unused_files.py \
+    get_latest_version.py scripts
 
 ### amd-64 ###
 
