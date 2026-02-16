@@ -1,6 +1,6 @@
 FROM debian:12-slim AS base
 
-ARG VERSION
+ARG VERSION=latest
 
 ENV TERRARIA_VERSION=$VERSION
 ENV TERRARIA_DIR=/root/.local/share/Terraria
@@ -19,9 +19,9 @@ RUN chmod +x \
     download_server.py \
     prune_unused_files.py \
     get_latest_version.py
-    
-RUN apt-get update -qq && apt-get -qq install python3
 
+RUN apt-get update -qq && apt-get -qq install python3
+    
 RUN python3 download_server.py ${TERRARIA_VERSION}
 
 RUN python3 prune_unused_files.py
@@ -43,10 +43,7 @@ ENV autocreate=1 \
 
 RUN mkdir -p ${TERRARIA_DIR}/Worlds && mkdir -p ${TERRARIA_DIR}/scripts
 
-RUN mv create-server-config.sh \ 
-    init-TerrariaServer-amd64.sh \
-    init-TerrariaServer-arm64.sh \
-    download_server.py \
+RUN mv download_server.py \
     prune_unused_files.py \
     get_latest_version.py scripts
 
