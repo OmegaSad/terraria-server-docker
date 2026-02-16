@@ -1,20 +1,18 @@
 services: 
   terraria-server:
-    image: hexlo/terraria-server-docker:latest
+    build:
+      context: https://github.com/OmegaSad/terraria-server-docker/tree/test-branch.git
     container_name: terraria-server
     restart: unless-stopped
     stdin_open: true
     tty: true     
     ports:
-      - 7779:7777
+      - 7778:7777
     volumes:
-      - type: bind
-        source: ./Worlds
-        target: /root/.local/share/Terraria/Worlds
+      - $WorldsFolder:/root/.local/share/Terraria/Worlds    
     environment:
       - world=/root/.local/share/Terraria/Worlds/world1.wld
       - autocreate=2
       - difficulty=2
-      - worldname=world1
       - password=hello
       - motd="Welcome to my server! :)"
