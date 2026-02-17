@@ -20,11 +20,17 @@ RUN chmod +x \
     prune_unused_files.py \
     get_latest_version.py
 
-RUN apt-get update -qq && apt-get -qq install python3
+RUN apt-get update -qq && apt-get -qq install python3 && rm -rf /var/lib/apt/lists/*
     
-RUN python3 download_server.py ${TERRARIA_VERSION}
+RUN python3 download_server.py ${TERRARIA_VERSION} && python3 prune_unused_files.py && apt-get -qq purge python3 && apt-get -qq autoremove 
 
-RUN python3 prune_unused_files.py
+RUN mkdir -p ${TERRARIA_DIR}/Worlds && rm -dR __pycache__ \
+    changelog.txt \
+    download_server.py \
+    prune_unused_files.py \
+    get_latest_version.py \
+    get_latest_version.cpython-314.pyc \
+    Terraria.png
 
 ENV autocreate=1 \
     seed='' \
@@ -41,14 +47,8 @@ ENV autocreate=1 \
     npcstream=1 \
     priority=1
 
-RUN mkdir -p ${TERRARIA_DIR}/Worlds && mkdir -p ${TERRARIA_DIR}/scripts
-
-RUN mv download_server.py \
-    prune_unused_files.py \
-    get_latest_version.py scripts
 
 ### amd-64 ###
-
 FROM base AS build-amd64
 
 RUN chmod +x TerrariaServer.bin.x86_64
@@ -57,7 +57,7 @@ ENTRYPOINT [ "./init-TerrariaServer-amd64.sh" ]
 
 ### arm-64 ###
 
-FROM mono:latest AS build-arm64
+FROM mono:slim AS build-arm64
 
 ENV TERRARIA_DIR=/root/.local/share/Terraria
 
