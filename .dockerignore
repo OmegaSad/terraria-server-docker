@@ -1,0 +1,20 @@
+terraria-server/
+
+# All git stuff
+**/.git*
+.gitignore
+README.md
+
+
+# All docker stuff
+docker-compose-example.yml
+docker-compose.yml
+.env
+
+# Python Stuff
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+jenkinsfile
+tests/
