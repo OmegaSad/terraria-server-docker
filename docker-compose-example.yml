@@ -1,7 +1,7 @@
 services: 
   terraria-server:
     build:
-      context: https://github.com/OmegaSad/terraria-server-docker.git#test-branch
+      context: https://github.com/OmegaSad/terraria-server-docker.git
 ##      args: 
 ##        - VERSION=1.x.x.x ## Change xs to versions required
     container_name: terraria-server
