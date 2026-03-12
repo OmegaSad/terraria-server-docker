@@ -28,7 +28,6 @@ RUN mkdir -p ${TERRARIA_DIR}/Worlds && rm -dR __pycache__ \
     download_server.py \
     prune_unused_files.py \
     get_latest_version.py \
-    get_latest_version.cpython-314.pyc \
     Terraria.png
 
 ENV autocreate=1 \
